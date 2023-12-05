@@ -81,7 +81,7 @@
 <script>
    // function WorldNews(){
          // us
-    fetch('../public/json/newsUS.json')
+    fetch('https://raw.githubusercontent.com/saepul-idn/dev/main/src/public/Json/newsUS.json')
     .then(response => response.json())
     .then(data => {
         // Proses data dan tampilkan di HTML
@@ -110,7 +110,7 @@
     
     function LokalNews(){
         // lokal
-        fetch('../public/json/news.json')
+        fetch('https://raw.githubusercontent.com/saepul-idn/dev/main/src/public/Json/news.json')
         .then(response => response.json())
         .then(data => {
             // Proses data dan tampilkan di HTML
