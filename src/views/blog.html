@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <title>Blog Me</title>
+    <style>
+        h2{margin-left: 10px; color: rgb(121, 107, 107);}
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <header class="headme">
+                <h1 style="margin-left: 10px; color: brown;">Blog 
+                    <span style="margin-left: 10px; color: rgb(121, 107, 107);">Me</span>
+                </h1>
+                <nav class="navbar-blog">
+                    <a href="../../index.html" class="navme">Home</a>
+                    <a href="../../index.html" class="navme">Artikel</a>
+                    <a href="" class="navme">Blog</a>
+                    <a href="./project.html">Project</a>
+                    <a href="./about.html">About</a>
+                </nav>
+        </header>
+
+        <div class="container-blog">
+                <div class="tab-container">
+                    <div class="tab-button">
+                        <!-- <button onclick="showTab('Tutorial')">Tutorial</button>
+                        <button onclick="showTab('news')">News indonesia</button>
+                        <button onclick="showTab('tab1')">News World</button> -->
+                        <button onclick="showTab('Tutorial')">My Blog Link</button>
+                        <button onclick="showTab('news')">News indonesia</button>
+                        <button onclick="showTab('newsUS')">News World</button>
+                    </div>
+                    <div id="Tutorial" class="tab-content">
+                        <div class="info">
+                        <a href="https://alert-indonesia.blogspot.com/" class="a-icons">
+                            <img src="../public/images/blogspot.png" alt=""
+                            class="icons">blogspot
+                        </a>
+
+                        </div>
+
+                    </div>
+                    <div id="news" class="tab-content"></div>
+                    <div id="newsUS" class="tab-content"></div>
+                </div>
+        </div>
+        <!-- footer -->
+        <div class="container-1">
+            <footer>
+                <p style="text-align: center; color: brown;">Copy
+                    <span style="color: rgb(121, 107, 107);">Right</span>
+                    <span>@iming</span>
+                </p>
+                <a href=""></a>
+            </footer>
+        </div>
+    </div>
+<!-- sc tab -->
+<script>
+    function showTab(tabId) {
+        // Menyembunyikan semua konten tab
+        var tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(function (tabContent) {
+            tabContent.style.display = 'none';
+        });
+
+        // Menampilkan konten tab yang dipilih
+        var selectedTab = document.getElementById(tabId);
+        if (selectedTab) {
+            selectedTab.style.display = 'block';
+            LokalNews();
+        }
+    }
+</script>
+<!-- sc news -->
+<script>
+   // function WorldNews(){
+         // us
+    fetch('../public/json/newsUS.json')
+    .then(response => response.json())
+    .then(data => {
+        // Proses data dan tampilkan di HTML
+        displayNews(data.articles);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+    function displayNews(articles) {
+        const newsContainer = document.getElementById('newsUS');
+
+        // Loop melalui setiap artikel dan tampilkan informasinya
+        articles.forEach(article => {
+            const articleDiv = document.createElement('div');
+            articleDiv.innerHTML = `
+                <h3 style="margin-left: 10px; color: brown;">${article.title}</h3>
+                <p>Author: ${article.author}</p>
+                <p>Published at: ${article.publishedAt}</p>
+                <p>${article.description}</p>
+                <a href="${article.url}" target="_blank">Read more</a>
+                <hr>
+            `;
+            newsContainer.appendChild(articleDiv);
+        });
+    }
+    //}
+    
+    function LokalNews(){
+        // lokal
+        fetch('../public/json/news.json')
+        .then(response => response.json())
+        .then(data => {
+            // Proses data dan tampilkan di HTML
+            displayNews(data.articles);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+        function displayNews(articles) {
+            const newsContainer = document.getElementById('news');
+
+            // Loop melalui setiap artikel dan tampilkan informasinya
+            articles.forEach(article => {
+                const articleDiv = document.createElement('div');
+                articleDiv.innerHTML = `
+                    <h3 style="margin-left: 10px; color: brown;">${article.title}</h3>
+                    <p>Author: ${article.author}</p>
+                    <p>Published at: ${article.publishedAt}</p>
+                    <p>${article.description}</p>
+                    <a href="${article.url}" target="_blank">Read more</a>
+                    <hr>
+                `;
+                newsContainer.appendChild(articleDiv);
+            });
+    }
+    }
+
+</script>
+
+
+</body>
+</html>
